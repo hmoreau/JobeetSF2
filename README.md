@@ -20,6 +20,7 @@ et décompresser dans /vendor/doctrine/doctrine-fixtures-bundle/Doctrine/Bundle/F
 
 ### Modifier l'autoload
 Dans le fichier /app/autoload.php :
+
         // ...
         $loader = require __DIR__.'/../vendor/autoload.php';
         // ...  
@@ -28,6 +29,7 @@ Dans le fichier /app/autoload.php :
         $loader->add('', __DIR__.'/../vendor/doctrine/data-fixtures/lib');
         
         // ...
+        
  Reprendre à partir de l'étape 4
 
    
