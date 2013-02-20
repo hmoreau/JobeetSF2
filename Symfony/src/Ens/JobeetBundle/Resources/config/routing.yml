@@ -2,6 +2,9 @@
 #    pattern:  /hello/{name}
 #    defaults: { _controller: EnsJobeetBundle:Default:index }
 
+EnsJobeetBundle_category:
+    pattern:  /category/{slug}
+    defaults: { _controller: EnsJobeetBundle:Category:show }
 
 EnsJobeetBundle_job:
     resource: "@EnsJobeetBundle/Resources/config/routing/job.yml"
