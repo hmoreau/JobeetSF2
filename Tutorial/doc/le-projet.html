@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Tuto Jobeet Symfony2 FR :: Tutoriel Jobeet avec Symfony2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-responsive.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/docs.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/prettify.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/shadowbox.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/print.css" media="print" />
+<link rel="shortcut icon" href="assets/img/favicon.ico">
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+	<a href="https://github.com/thujohn/Jobeet" target="_blank" id="gogithub"><img src="assets/img/github.gif" alt="" /></a>
+	<div class="navbar navbar-inverse hide-on-desktop show-on-tablets show-on-mobile noprint">
+		<div class="navbar-inner noprint">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="./">Jobeet FR</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="sommaire"><a href="sommaire.html"><i class="icon-chevron-right"></i>Sommaire</a></li><li class="demarrage-du-projet"><a href="demarrage-du-projet.html"><i class="icon-chevron-right"></i><strong>[01]</strong> Démarrage du projet</a></li><li class="active"><a href="le-projet.html"><i class="icon-chevron-right"></i><strong>[02]</strong> Le projet</a></li><li class="le-modele-de-donnees"><a href="le-modele-de-donnees.html"><i class="icon-chevron-right"></i><strong>[03]</strong> Le Modèle de Données</a></li><li class="le-controleur-et-la-vue"><a href="le-controleur-et-la-vue.html"><i class="icon-chevron-right"></i><strong>[04]</strong> Le Contrôleur et la Vue</a></li><li class="le-routage"><a href="le-routage.html"><i class="icon-chevron-right"></i><strong>[05]</strong> Le Routage</a></li><li class="aller-plus-loin-avec-le-modele"><a href="aller-plus-loin-avec-le-modele.html"><i class="icon-chevron-right"></i><strong>[06]</strong> Aller plus loin avec le Modèle</a></li><li class="jouons-avec-la-page-categorie"><a href="jouons-avec-la-page-categorie.html"><i class="icon-chevron-right"></i><strong>[07]</strong> Jouons avec les catégories</a></li><li class="les-tests-unitaires"><a href="les-tests-unitaires.html"><i class="icon-chevron-right"></i><strong>[08]</strong> Les tests unitaires</a></li><li class="les-tests-fonctionnels"><a href="les-tests-fonctionnels.html"><i class="icon-chevron-right"></i><strong>[09]</strong> Les tests fonctionnels</a></li><li class="les-formulaires"><a href="les-formulaires.html"><i class="icon-chevron-right"></i><strong>[10]</strong> Les formulaires</a></li><li class="testez-vos-formulaires"><a href="testez-vos-formulaires.html"><i class="icon-chevron-right"></i><strong>[11]</strong> Testez vos formulaires</a></li><li class="le-paquet-admin"><a href="le-paquet-admin.html"><i class="icon-chevron-right"></i><strong>[12]</strong> Le paquet Admin</a></li><li class="securite"><a href="securite.html"><i class="icon-chevron-right"></i><strong>[13]</strong> Sécurité</a></li><li class="flux-de-donnees"><a href="flux-de-donnees.html"><i class="icon-chevron-right"></i><strong>[14]</strong> Flux de données</a></li><li class="services-web"><a href="services-web.html"><i class="icon-chevron-right"></i><strong>[15]</strong> Services Web</a></li><li class="l-envoi-d-email"><a href="l-envoi-d-email.html"><i class="icon-chevron-right"></i><strong>[16]</strong> L'envoi d'email</a></li><li class="la-recherche"><a href="la-recherche.html"><i class="icon-chevron-right"></i><strong>[17]</strong> La recherche</a></li><li class="ajax"><a href="ajax.html"><i class="icon-chevron-right"></i><strong>[18]</strong> AJAX</a></li><li class="internationalisation-et-regionalisation"><a href="internationalisation-et-regionalisation.html"><i class="icon-chevron-right"></i><strong>[19]</strong> Internationalisation et régionalisation</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="container">
+		<div id="bootstrap-docs">
+			<header class="jumbotron subhead hide-on-tablets hide-on-mobile" id="overview">
+				<div class="container">
+					<h1><a href="./">Jobeet FR</a></h1>
+					<p class="lead">Le tutoriel pour Symfony2 en français</p>
+				</div>
+			</header>
+			<div class="container">
+				<div class="row">
+										<div class="span3 bs-docs-sidebar hide-on-tablets hide-on-mobile noprint">
+						<ul class="nav nav-list bs-docs-sidenav">
+							<li class="sommaire"><a href="sommaire.html"><i class="icon-chevron-right"></i>Sommaire</a></li><li class="demarrage-du-projet"><a href="demarrage-du-projet.html"><i class="icon-chevron-right"></i><strong>[01]</strong> Démarrage du projet</a></li><li class="active"><a href="le-projet.html"><i class="icon-chevron-right"></i><strong>[02]</strong> Le projet</a></li><li class="le-modele-de-donnees"><a href="le-modele-de-donnees.html"><i class="icon-chevron-right"></i><strong>[03]</strong> Le Modèle de Données</a></li><li class="le-controleur-et-la-vue"><a href="le-controleur-et-la-vue.html"><i class="icon-chevron-right"></i><strong>[04]</strong> Le Contrôleur et la Vue</a></li><li class="le-routage"><a href="le-routage.html"><i class="icon-chevron-right"></i><strong>[05]</strong> Le Routage</a></li><li class="aller-plus-loin-avec-le-modele"><a href="aller-plus-loin-avec-le-modele.html"><i class="icon-chevron-right"></i><strong>[06]</strong> Aller plus loin avec le Modèle</a></li><li class="jouons-avec-la-page-categorie"><a href="jouons-avec-la-page-categorie.html"><i class="icon-chevron-right"></i><strong>[07]</strong> Jouons avec les catégories</a></li><li class="les-tests-unitaires"><a href="les-tests-unitaires.html"><i class="icon-chevron-right"></i><strong>[08]</strong> Les tests unitaires</a></li><li class="les-tests-fonctionnels"><a href="les-tests-fonctionnels.html"><i class="icon-chevron-right"></i><strong>[09]</strong> Les tests fonctionnels</a></li><li class="les-formulaires"><a href="les-formulaires.html"><i class="icon-chevron-right"></i><strong>[10]</strong> Les formulaires</a></li><li class="testez-vos-formulaires"><a href="testez-vos-formulaires.html"><i class="icon-chevron-right"></i><strong>[11]</strong> Testez vos formulaires</a></li><li class="le-paquet-admin"><a href="le-paquet-admin.html"><i class="icon-chevron-right"></i><strong>[12]</strong> Le paquet Admin</a></li><li class="securite"><a href="securite.html"><i class="icon-chevron-right"></i><strong>[13]</strong> Sécurité</a></li><li class="flux-de-donnees"><a href="flux-de-donnees.html"><i class="icon-chevron-right"></i><strong>[14]</strong> Flux de données</a></li><li class="services-web"><a href="services-web.html"><i class="icon-chevron-right"></i><strong>[15]</strong> Services Web</a></li><li class="l-envoi-d-email"><a href="l-envoi-d-email.html"><i class="icon-chevron-right"></i><strong>[16]</strong> L'envoi d'email</a></li><li class="la-recherche"><a href="la-recherche.html"><i class="icon-chevron-right"></i><strong>[17]</strong> La recherche</a></li><li class="ajax"><a href="ajax.html"><i class="icon-chevron-right"></i><strong>[18]</strong> AJAX</a></li><li class="internationalisation-et-regionalisation"><a href="internationalisation-et-regionalisation.html"><i class="icon-chevron-right"></i><strong>[19]</strong> Internationalisation et régionalisation</a></li>
+						</ul>
+					</div>
+					<div class="span9">
+                        <section class="justify">
+                        <a href="le-projet-full.html" class="pull-right btn btn-success hide-on-tablets hide-on-mobile noprint">Pleine page</a>																					<div class="page-header clearfix"><h1 class="pull-left">Le projet</h1></div>
+							<p>Ce deuxième chapitre porte sur les spécifications du projet. Ils sont les mêmes que dans le tutoriel Jobeet d'origine de sorte que vous puissiez voir une description plus détaillée et une conception de la maquette.</p>
+<blockquote><p><em><strong>Jobeet est un logiciel Open-Source d'offres d'emploi</strong> qui ne fait qu'une chose, mais il le fait bien. Il est facile à utiliser, personnaliser, étendre et intégrer dans votre site web. Il prend en charge plusieurs langues, et bien sûr, utilise les dernières technologies Web 2.0 pour améliorer l'expérience utilisateur. Il fournit également des flux de données (RSS) et une API pour interagir avec lui en programmant.</em></p></blockquote>
+<br>
+<h2>Histoires d'utilisateurs</h2>
+<p>Nous avons quatre types d'utilisateurs: <strong>administrateur</strong> (possède et administre le site web), <strong>utilisateur</strong> (visite le site à la recherche d'un emploi), <strong>recruteur</strong> (visite le site pour publier des offres) et <strong>partenaire</strong> (re-publie les offres sur son site).</p>
+<p>Dans le tutoriel original nous avons dû faire deux applications, le <strong>frontend</strong>, où les utilisateurs interagissent avec le site, et le <strong>backend</strong>, où les administrateurs gèrent le site. <a href="http://symfony.com/doc/current/cookbook/symfony1.html#applications" target="_blank">Avec Symfony2 nous ne le ferons pas</a>. Nous aurons une seule application et, à l'intérieur, une section distincte sécurisée pour les administrateurs.</p>
+<br>
+<h3>Scénario F1: Sur la page d'accueil, l'utilisateur voit les dernières offres actives</h3>
+<p>Sur la page d'accueil Jobeet, un utilisateur voit une liste des 10 dernières offres actives regroupées par catégorie. Seul le lieu, le poste et la société sont affichés pour chaque offre. Pour chaque catégorie, des liens permettent d'énumérer tous les offres. L'utilisateur peut également rechercher un emploi ou publier un nouvel emploi.</p>
+<br>
+<h3>Scénario F2: Un utilisateur peut afficher toutes les offres d'une catégorie</h3>
+<p>L'utilisateur voit une liste triée par date de toutes les offres d'emploi de la catégorie et paginée avec 20 offres par page.</p>
+<br>
+<h3>Scénario F3: Un utilisateur affine la liste avec quelques mots-clés</h3>
+<p>L'utilisateur peut saisir des mots-clés pour affiner sa recherche. Les mots-clés peuvent être des mots trouvés dans le lieu, le poste, la catégorie ou les champs de l'entreprise.</p>
+<br>
+<h3>Scénario F4: Un utilisateur clique sur une offre pour obtenir des informations plus détaillées</h3>
+<p>L'utilisateur peut sélectionner une offre dans la liste pour afficher des informations plus détaillées.</p>
+<br>
+<h3>Scénario F5: Un utilisateur publie une offre</h3>
+<p>Un utilisateur peut publier une offre. Une offre est composée de plusieurs informations:</p>
+<ul class="unstyled">
+	<li>- Nom de l'entreprise</li>
+	<li>- Type de contrat (temps plein, temps partiel, ou freelance)</li>
+	<li>- Logo (option)</li>
+	<li>- Lien (option)</li>
+	<li>- Intitulé du poste</li>
+	<li>- Lieu</li>
+	<li>- Catégorie (l'utilisateur choisit dans une liste de catégories possibles)</li>
+	<li>- Description du poste (les liens sont automatiquement créés)</li>
+	<li>- Comment postuler (les liens sont automatiquement créés)</li>
+	<li>- Publique (si l'offre peut également être publiée sur les sites partenaires)</li>
+	<li>- E-mail (e-mail du recruteur)</li>
+</ul>
+<p>Le processus comporte seulement deux étapes: l'utilisateur remplit le formulaire avec toutes les informations nécessaires pour décrire l'offre, puis il valide les informations en prévisualisant la fiche finale.</p>
+<p>Il n'est pas nécessaire de créer un compte pour publier une offre. Une offre peut être modifiée ultérieurement, grâce à un lien spécifique (protégé par un jeton) donné à l'utilisateur lorsque celle-ci est créée.</p>
+<p>Chaque offre d'emploi est en ligne pendant 30 jours (durée configurable par l'administrateur). Un utilisateur peut réactiver ou prolonger la validité de l'offre pour une période de 30 jours supplémentaires, mais uniquement lorsque l'offre expire dans moins de 5 jours.</p>
+<br>
+<h3>Scénario F6: Un utilisateur demande à devenir partenaire</h3>
+<p>Un utilisateur doit demander à devenir partenaire et être autorisé à utiliser l'API Jobeet. Il peut aussi choisir d'obtenir des offres à partir d'un ensemble de sous-catégories disponibles. Pour postuler, l'utilisateur doit fournir les renseignements suivants:</p>
+<ul class="unstyled">
+	<li>- Nom</li>
+	<li>- E-mail</li>
+	<li>- Site</li>
+</ul>
+<p>Le compte partenaire doit être activé par l'administrateur. Une fois activé, le partenaire reçoit un jeton à utiliser avec l'API par email.</p>
+<br>
+<h3>Scénario F7: Un partenaire récupère la liste des emplois actifs</h3>
+<p>Un partenaire peut récupérer la liste des offres en cours en appelant l'API avec son jeton partenaire. La liste peut être retournée dans le format XML, JSON ou YAML. Le partenaire peut limiter le nombre d'offres qui seront retournées, et affiner sa requête en spécifiant une catégorie.</p>
+<br>
+<h3>Scénario B1: Un administrateur configure le site</h3>
+<p>L'administrateur peut modifier les catégories disponibles sur le site.</p>
+<br>
+<h3>Scénario B2: Un administrateur gère les offres</h3>
+<p>L'administrateur peut modifier et supprimer toutes les offres affichées.</p>
+<br>
+<h3>Scénario B3: Un administrateur gère les partenaires</h3>
+<p>L'administrateur peut créer ou modifier des partenaires. Il est responsable de l'activation d'un partenaire et peut également désactiver celui-ci. Lorsque l'administrateur active un nouveau partenaire, le système crée un jeton unique pour être utilisé par le partenaire.</p>
+<br>
+<p class="clearfix noprint">
+	<a href="demarrage-du-projet.html" class="btn btn-success pull-left">Chapitre précédent</a>
+	<a href="le-modele-de-donnees.html" class="btn btn-success pull-right">Chapitre suivant</a>
+</p>														<p class="link_source noprint"><a href="http://www.ens.ro/2012/03/24/symfony2-jobeet-day-2-the-project/" target="_blank">» Lire l'article original</a></p>
+																					<br>
+							
+                        </section>
+					</div>
+				</div>
+				<hr />
+				<footer>
+					<p class="tcenter">Tutoriel original par <a href="http://www.ens.ro/2012/03/21/jobeet-tutorial-with-symfony2/" target="_blank">Dragos Holban</a> - Traduit par <a href="https://plus.google.com/109236735134093009460?rel=author" target="_blank">Jonathan Thuau</a> - Le tuto sur <a href="https://github.com/thujohn/Jobeet" target="_blank">github</a></p>
+				</footer>
+			</div>
+		</div>
+	</div>
+<script src="assets/js/jquery-1.8.2.min.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/prettify.js"></script>
+<script src="assets/js/lang-yaml.js"></script>
+<script src="assets/js/shadowbox.js"></script>
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function(){
+	Shadowbox.init();
+	prettyPrint();
+	jQuery('.bs-docs-sidenav').affix({
+		offset: {
+			top: 150,
+			bottom: 270
+		}
+	});
+	jQuery('a[href*=#]').click(function (e) {
+		var hash = jQuery(this).attr('href');
+		e.preventDefault();
+		var dest = 0;
+		if (jQuery(this.hash).offset().top > (jQuery(document).height() - jQuery(window).height())){
+			dest = jQuery(document).height() - jQuery(window).height();
+		}else{
+			dest = jQuery(this.hash).offset().top;
+		}
+		jQuery('html,body').animate({scrollTop:dest}, 1000, 'swing');
+	});
+});
+-->
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+								
+																					<div class="page-header clearfix"><h1 class="pull-left">Démarrage du projet</h1>
+                                                                                    </div>
+							<p>Dans ce premier chapitre, nous allons installer l'environnement de développement, installer Symfony2 et afficher une page de l'application dans un navigateur web. Tout d'abord, vous devez vérifier que votre ordinateur dispose d'un environnement de travail pour le développement web. Au minimum, vous avez besoin d'un serveur web (Apache, par exemple), un moteur de base de données (MySQL), et PHP 5.3.2 ou plus récent.</p>
+<br />
+<h2>Télécharger et installer Symfony2</h2>
+<p>Préparez un répertoire sur votre serveur web où vous souhaitez installer le nouveau projet. Nous nommerons ce répertoire <strong>jobeet</strong> comme le nom de notre futur site web. Ensuite, allez à <a href="http://symfony.com/download" target="_blank">http://symfony.com/download</a>, choisissez "Symfony Standard" (la version avec les dépendances) et téléchargez-le (au moment de la rédaction de ce tutoriel, la dernière version de Symfony était 2.0.11). Après le téléchargement, décompressez l'archive et copiez le contenu du répertoire "Symfony" dans celui de votre projet. Vous devriez avoir quelque chose comme ceci:</p>
+<p class="tcenter"><a href="assets/img/jobeet_1-1.png" rel="shadowbox"><img src="assets/img/jobeet_1-1.png" alt="" class="img-polaroid" /></a></p>
+<br />
+<h2>Configuration du serveur web</h2>
+<p>Une bonne pratique est de mettre à la racine uniquement les fichiers qui doivent être accessibles par un navigateur web, comme les feuilles de style, les fichiers javascripts et les images. Par défaut, il est recommandé de stocker ces fichiers dans le sous-répertoire /web du projet.</p>
+<p>Afin de configurer Apache pour votre nouveau projet, localisez et ouvrez le fichier de configuration httpd.conf et ajoutez la configuration suivante:</p>
+<pre class="prettyprint linenums">
+&lt;VirtualHost *:80&gt;
+	ServerName jobeet.local
+	DocumentRoot /home/dragos/work/jobeet/web
+	DirectoryIndex app.php
+	ErrorLog /var/log/apache2/jobeet-error.log
+	CustomLog /var/log/apache2/jobeet-access.log combined
+	&lt;Directory "/home/dragos/work/jobeet/web"&gt;
+		AllowOverride All
+		Allow from All
+	&lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</pre>
+<p>Modifiez la configuration ci-dessus en tenant compte de votre configuration, puis redémarrez votre serveur web.</p>
+<p>Il s'agit de la méthode standard pour définir un nouvel hôte virtuel dans Apache. Selon la configuration de votre serveur ou la version d'Apache, certaines choses peuvent être légèrement différentes. Par exemple, dans Ubuntu, vous devez créer un nouveau fichier dans le dossier /etc/apache2/sites-enabled/ nommé jobeet avec le contenu ci-dessus.</p>
+<p>Le nom de domaine <strong>jobeet.local</strong> utilisé dans la configuration d'Apache doit être déclaré localement. Si vous utilisez un système Linux, il doit être fait dans le fichier <strong>/etc/hosts</strong>. Si vous utilisez Windows, ce fichier se trouve dans le dossier <strong>C:\WINDOWS\system32\drivers\etc\</strong>. Ajoutez la ligne suivante:</p>
+<pre>127.0.0.1 jobeet.local</pre>
+<br />
+<h2>Test de l'installation Symfony2</h2>
+<p>Après le redémarrage d'Apache, ouvrez votre navigateur et tapez <a href="http://jobeet.local/app_dev.php" target="_blank">http://jobeet.local/app_dev.php</a>. Vous devriez voir la page suivante:</p>
+<p class="tcenter"><a href="assets/img/jobeet_1-2.png" rel="shadowbox"><img src="assets/img/jobeet_1-2.png" alt="" class="img-polaroid" /></a></p>
+<p>Pour éviter de vous arracher les cheveux un peu plus tard, vérifiez que votre configuration peut exécuter un projet Symfony2 en pointant sur l'adresse suivante: <a href="http://jobeet.local/config.php" target="_blank">http://jobeet.local/config.php</a>. Assurez-vous que vous n'avez pas de problème majeur mentionné, et suivez les recommandations facultatives énumérées (le cas échéant).</p>
+<br />
+<h2>La console Symfony2</h2>
+<p>Tout comme Symfony 1.x, Symfony2 est livré avec l'outil composant de la console que vous allez utiliser pour différentes tâches. Pour voir une liste des choses qu'il peut faire pour vous, tapez à l'invite de commande:</p>
+<pre>php app/console list</pre>
+<br />
+<h2>Création du paquet Application</h2>
+<p>Comme vous le savez, un projet Symfony2 est composé de paquets. Même le framework Symfony est un paquet. Pour créer un nouveau paquet pour notre application, exécutez la ligne de commande:</p>
+<pre>php app/console generate:bundle --namespace=Ens/JobeetBundle --format=yml</pre>
+<p>Le générateur va vous poser quelques questions avant de générer le paquet. Voici les questions et les réponses (toutes sauf une sont les réponses par défaut):</p>
+<pre class="prettyprint linenums">
+Bundle namespace [Ens/JobeetBundle]: Ens/JobeetBundle
+Bundle name [EnsJobeetBundle]: EnsJobeetBundle
+Target directory [/home/dragos/work/jobeet/src]: /home/dragos/work/jobeet/src
+Configuration format (yml, xml, php, or annotation) [yml]: yml
+Do you want to generate the whole directory structure [no]? yes
+Do you confirm generation [yes]? yes
+Confirm automatic update of your Kernel [yes]? yes
+Confirm automatic update of the Routing [yes]? yes
+</pre>
+<p>Videz le cache après avoir créé le nouveau paquet avec:</p>
+<pre>
+php app/console cache:clear --env=prod
+php app/console cache:clear --env=dev
+</pre>
+<p>Le nouveau paquet <strong>Jobeet</strong> peut maintenant être trouvé dans le répertoire src du projet: <strong>src/Ens/JobeetBundle</strong>. Le générateur de paquet a créé un <strong>DefaultController</strong> avec une action <strong>index</strong>. Vous pouvez accéder à celui-ci dans votre navigateur: <a href="http://jobeet.local/hello/jobeet" target="_blank">http://jobeet.local/hello/jobeet</a> ou <a href="http://jobeet.local/app_dev.php/hello/jobeet" target="_blank">http://jobeet.local/app_dev.php/hello/jobeet</a></p>
+<br />
+<h2>Les environnements</h2>
+<p>Comme Symfony 1.x, Symfony2 a aussi des environnements différents. Si vous regardez dans le répertoire <strong>/web</strong> du projet, vous verrez deux fichiers php: <strong>app.php</strong> et <strong>app_dev.php</strong>. Ces fichiers sont appelés contrôleurs frontaux, toutes les requêtes de l'application se font à travers eux. Le fichier <strong>app.php</strong> est pour l'environnement de production et <strong>app_dev.php</strong> est utilisé par les développeurs Web quand ils travaillent sur l'application dans l'environnement de développement. L'environnement de développement sera très utile, car il vous montrera toutes les erreurs et avertissements via la <strong>Web Debug Toolbar</strong> - le meilleur ami du développeur.</p>
+<br />
+<p class="clearfix noprint">
+	<a href="le-projet" class="btn btn-success pull-right">Chapitre suivant</a>
+</p>														<p class="link_source noprint"><a href="http://www.ens.ro/2012/03/22/symfony2-jobeet-day-1-starting-up-the-project/" target="_blank">&raquo; Lire l'article original</a></p>
+																					<br />
+							
+												
