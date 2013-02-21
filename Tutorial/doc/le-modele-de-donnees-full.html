@@ -87,12 +87,26 @@ Database schema updated successfully! "7" queries were executed
 <h2>Les données initiales</h2>
 <p>Les tables ont été créées dans la BDD, mais elles ne contiennent pas de données. Pour toute application web, il existe trois types de données: les <strong>données initiales</strong> (ce qui est nécessaire pour que l'application fonctionne, dans notre cas, nous avons quelques catégories initiales et un utilisateur admin), les <strong>données test</strong> (nécessaires pour tester l'application) et les <strong>données utilisateur</strong> (créées par les utilisateurs au fil du temps).</p>
 <p>Pour remplir la BDD avec des données initiales, nous allons utiliser <a href="http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html" target="_blank">DoctrineFixturesBundle</a>. Pour installer ce paquet, suivez les étapes suivantes:</p>
-<p>1. Ajoutez les lignes suivantes à votre fichier <strong>deps</strong>:</p>
-<pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pun">[</span><span class="pln">doctrine</span><span class="pun">-</span><span class="pln">fixtures</span><span class="pun">]</span></li><li class="L1"><span class="pln">    git</span><span class="pun">=</span><span class="pln">http</span><span class="pun">:</span><span class="com">//github.com/doctrine/data-fixtures.git</span></li><li class="L2"><span class="pln"> </span></li><li class="L3"><span class="pun">[</span><span class="typ">DoctrineFixturesBundle</span><span class="pun">]</span></li><li class="L4"><span class="pln">    git</span><span class="pun">=</span><span class="pln">http</span><span class="pun">:</span><span class="com">//github.com/doctrine/DoctrineFixturesBundle.git</span></li><li class="L5"><span class="pln">    target</span><span class="pun">=</span><span class="str">/bundles/</span><span class="typ">Symfony</span><span class="pun">/</span><span class="typ">Bundle</span><span class="pun">/</span><span class="typ">DoctrineFixturesBundle</span></li><li class="L6"><span class="pln">    version</span><span class="pun">=</span><span class="pln">origin</span><span class="pun">/</span><span class="lit">2.0</span></li></ol></pre>
-<p>2. Mettez à jour les vendors:</p>
-<pre>php bin/vendors install --reinstall</pre>
-<p>3. Enregistrez le namespace <strong>Doctrine\Common\DataFixtures</strong> dans <strong>app/autoload.php</strong> "<strong>avant</strong>" <strong>Doctrine\Common</strong>:</p>
-<pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="com">// ...</span></li><li class="L1"><span class="pln">$loader</span><span class="pun">-&gt;</span><span class="pln">registerNamespaces</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span></li><li class="L2"><span class="pln">    </span><span class="com">// ...</span></li><li class="L3"><span class="pln">    </span><span class="str">'Doctrine\\Common\\DataFixtures'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> __DIR__</span><span class="pun">.</span><span class="str">'/../vendor/doctrine-fixtures/lib'</span><span class="pun">,</span></li><li class="L4"><span class="pln">    </span><span class="str">'Doctrine\\Common'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> __DIR__</span><span class="pun">.</span><span class="str">'/../vendor/doctrine-common/lib'</span><span class="pun">,</span></li><li class="L5"><span class="pln">    </span><span class="com">// ...</span></li><li class="L6"><span class="pun">));</span></li></ol></pre>
+
+<p>1. Téléchargez <a href="https://github.com/doctrine/data-fixtures/archive/master.zip" target="_blank">https://github.com/doctrine/data-fixtures/archive/master.zip</a> et décompressez dans <br /> 
+<strong>vendor/doctrine/data-fixtures</strong></p>
+
+<p>2. Téléchargez <a href="https://github.com/doctrine/DoctrineFixturesBundle/archive/master.zip " target="_blank">https://github.com/doctrine/DoctrineFixturesBundle/archive/master.zip </a> et décompressez dans <br />
+<strong>vendor/doctrine/doctrine-fixtures-bundle/Doctrine/Bundle/FixturesBundle</strong></p>
+
+
+<p>3. Modifier l'autoload  dans <strong>app/autoload.php</strong> :</p>
+<pre class="prettyprint linenums">
+    // ...
+    $loader = require __DIR__.'/../vendor/autoload.php';
+    // ...  
+
+    $loader->add('', __DIR__.'/../vendor/doctrine/doctrine-fixtures-bundle');
+    $loader->add('', __DIR__.'/../vendor/doctrine/data-fixtures/lib');
+
+    // ...
+</pre>
+
 <p>4. Enregistrez le paquet <strong>DoctrineFixturesBundle</strong> dans <strong>app/AppKernel.php</strong>:</p>
 <pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="com">// ...</span></li><li class="L1"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> registerBundles</span><span class="pun">()</span></li><li class="L2"><span class="pun">{</span></li><li class="L3"><span class="pln">    $bundles </span><span class="pun">=</span><span class="pln"> array</span><span class="pun">(</span></li><li class="L4"><span class="pln">        </span><span class="com">// ...</span></li><li class="L5"><span class="pln">        </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Symfony</span><span class="pln">\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle</span><span class="pun">(),</span></li><li class="L6"><span class="pln">        </span><span class="com">// ...</span></li><li class="L7"><span class="pln">    </span><span class="pun">);</span></li><li class="L8"><span class="pln">    </span><span class="com">// ...</span></li><li class="L9"><span class="pun">}</span></li></ol></pre>
 <p>Maintenant que tout est en place, nous allons créer de nouvelles classes pour charger les données dans un nouveau dossier dans notre paquet: <strong>src/Ens/JobeetBundle/DataFixtures/ORM</strong>.</p>
