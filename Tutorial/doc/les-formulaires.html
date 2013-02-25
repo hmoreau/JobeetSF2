@@ -66,32 +66,30 @@
 // src/Ens/JobeetBundle/Controller/JobController.php
 // ...
  
-public function createAction()
-{
-  $entity  = new Job();
-  $request = $this->getRequest();
-  $form    = $this->createForm(new JobType(), $entity);
-  $form->bind($request);
- 
-  if ($form->isValid()) {
-    $em = $this->getDoctrine()->getEntityManager();
- 
-    $em->persist($entity);
-    $em->flush();
- 
-    return $this->redirect($this->generateUrl('ens_job_show', array(
-      'company' => $entity->getCompanySlug(),
-      'location' => $entity->getLocationSlug(),
-      'id' => $entity->getId(),
-      'position' => $entity->getPositionSlug()
-    )));
-  }
- 
-  return $this->render('EnsJobeetBundle:Job:new.html.twig', array(
-    'entity' => $entity,
-    'form'   => $form->createView()
-  ));
-}
+    public function createAction(Request $request)
+    {
+        $entity  = new Job();
+        $form = $this->createForm(new JobType(), $entity);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('ens_job_show', array(
+                'company' => $entity->getCompanySlug(),
+                'location' => $entity->getLocationSlug(),
+                'id' => $entity->getId(),
+                'position' => $entity->getPositionSlug()
+              )));
+        }
+
+        return $this->render('EnsJobeetBundle:Job:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
 </pre>
 <p>Par défaut, le formulaire généré par Doctrine affiche des champs pour toutes les colonnes de la table. Mais pour le formulaire d'offre, certains d'entre eux ne doivent pas être modifiables par l'utilisateur final. Modifiez le formulaire <strong>Job</strong> comme ci-dessous:</p>
 <pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="com">// src/Ens/JobeetBundle/Form/JobType.php</span></li><li class="L1"><span class="pln"> </span></li><li class="L2"><span class="kwd">namespace</span><span class="pln"> </span><span class="typ">Ens</span><span class="pln">\JobeetBundle\Form</span><span class="pun">;</span></li><li class="L3"><span class="pln"> </span></li><li class="L4"><span class="kwd">use</span><span class="pln"> </span><span class="typ">Symfony</span><span class="pln">\Component\Form\AbstractType</span><span class="pun">;</span></li><li class="L5"><span class="kwd">use</span><span class="pln"> </span><span class="typ">Symfony</span><span class="pln">\Component\Form\FormBuilder</span><span class="pun">;</span></li><li class="L6"><span class="pln"> </span></li><li class="L7"><span class="kwd">class</span><span class="pln"> </span><span class="typ">JobType</span><span class="pln"> </span><span class="kwd">extends</span><span class="pln"> </span><span class="typ">AbstractType</span></li><li class="L8"><span class="pun">{</span></li><li class="L9"><span class="pln">    </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> buildForm</span><span class="pun">(</span><span class="typ">FormBuilder</span><span class="pln"> $builder</span><span class="pun">,</span><span class="pln"> array $options</span><span class="pun">)</span></li><li class="L0"><span class="pln">    </span><span class="pun">{</span></li><li class="L1"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'category'</span><span class="pun">);</span></li><li class="L2"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'type'</span><span class="pun">);</span></li><li class="L3"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'company'</span><span class="pun">);</span></li><li class="L4"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'logo'</span><span class="pun">);</span></li><li class="L5"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'url'</span><span class="pun">);</span></li><li class="L6"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'position'</span><span class="pun">);</span></li><li class="L7"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'location'</span><span class="pun">);</span></li><li class="L8"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'description'</span><span class="pun">);</span></li><li class="L9"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'how_to_apply'</span><span class="pun">);</span></li><li class="L0"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'token'</span><span class="pun">);</span></li><li class="L1"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'is_public'</span><span class="pun">);</span></li><li class="L2"><span class="pln">        $builder</span><span class="pun">-&gt;</span><span class="pln">add</span><span class="pun">(</span><span class="str">'email'</span><span class="pun">);</span></li><li class="L3"><span class="pln">    </span><span class="pun">}</span></li><li class="L4"><span class="pln"> </span></li><li class="L5"><span class="pln">    </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> getName</span><span class="pun">()</span></li><li class="L6"><span class="pln">    </span><span class="pun">{</span></li><li class="L7"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> </span><span class="str">'ens_jobeetbundle_jobtype'</span><span class="pun">;</span></li><li class="L8"><span class="pln">    </span><span class="pun">}</span></li><li class="L9"><span class="pun">}</span></li></ol></pre>
@@ -233,7 +231,7 @@ public function editAction($token)
   ));
 }
  
-public function updateAction($token)
+public function updateAction(Request $request,$token)
 {
   $em = $this->getDoctrine()->getEntityManager();
  
@@ -264,7 +262,7 @@ public function updateAction($token)
   ));
 }
  
-public function deleteAction($token)
+public function deleteAction(Request $request,$token)
 {
   $form = $this->createDeleteForm($token);
   $request = $this->getRequest();
@@ -317,7 +315,46 @@ private function createDeleteForm($token)
 <p class="tcenter"><a href="assets/img/jobeet_10-1.png" rel="shadowbox"><img src="assets/img/jobeet_10-1.png" alt="" class="img-polaroid"></a></p>
 <p class="tcenter"><a href="assets/img/jobeet_10-2.png" rel="shadowbox"><img src="assets/img/jobeet_10-2.png" alt="" class="img-polaroid"></a></p>
 <p>Nous allons maintenant rediriger les actions <strong>create</strong> et <strong>update</strong> de <strong>JobController</strong> ver la nouvelle page de prévisualisation: </p>
-<pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="com">// src/Ens/JobeetBundle/Controller/JobController.php</span></li><li class="L1"><span class="com">// ...</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> createAction</span><span class="pun">()</span></li><li class="L4"><span class="pun">{</span></li><li class="L5"><span class="pln">  </span><span class="com">// ...</span></li><li class="L6"><span class="pln"> </span></li><li class="L7"><span class="pln">  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">$form</span><span class="pun">-&gt;</span><span class="pln">isValid</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span></li><li class="L8"><span class="pln">    </span><span class="com">// ...</span></li><li class="L9"><span class="pln"> </span></li><li class="L0"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> $this</span><span class="pun">-&gt;</span><span class="pln">redirect</span><span class="pun">(</span><span class="pln">$this</span><span class="pun">-&gt;</span><span class="pln">generateUrl</span><span class="pun">(</span><span class="str">'ens_job_preview'</span><span class="pun">,</span><span class="pln"> array</span><span class="pun">(</span></li><li class="L1"><span class="pln">      </span><span class="str">'company'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $entity</span><span class="pun">-&gt;</span><span class="pln">getCompanySlug</span><span class="pun">(),</span></li><li class="L2"><span class="pln">      </span><span class="str">'location'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $entity</span><span class="pun">-&gt;</span><span class="pln">getLocationSlug</span><span class="pun">(),</span></li><li class="L3"><span class="pln">      </span><span class="str">'token'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $entity</span><span class="pun">-&gt;</span><span class="pln">getToken</span><span class="pun">(),</span></li><li class="L4"><span class="pln">      </span><span class="str">'position'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $entity</span><span class="pun">-&gt;</span><span class="pln">getPositionSlug</span><span class="pun">()</span></li><li class="L5"><span class="pln">    </span><span class="pun">)));</span></li><li class="L6"><span class="pln">  </span><span class="pun">}</span></li><li class="L7"><span class="pln"> </span></li><li class="L8"><span class="pln">  </span><span class="com">// ...</span></li><li class="L9"><span class="pun">}</span></li><li class="L0"><span class="pln"> </span></li><li class="L1"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> updateAction</span><span class="pun">(</span><span class="pln">$token</span><span class="pun">)</span></li><li class="L2"><span class="pun">{</span></li><li class="L3"><span class="pln">  </span><span class="com">// ...</span></li><li class="L4"><span class="pln"> </span></li><li class="L5"><span class="pln">  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">$editForm</span><span class="pun">-&gt;</span><span class="pln">isValid</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span></li><li class="L6"><span class="pln">    </span><span class="com">// ...</span></li><li class="L7"><span class="pln"> </span></li><li class="L8"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> $this</span><span class="pun">-&gt;</span><span class="pln">redirect</span><span class="pun">(</span><span class="pln">$this</span><span class="pun">-&gt;</span><span class="pln">generateUrl</span><span class="pun">(</span><span class="str">'ens_job_preview'</span><span class="pun">,</span><span class="pln"> array</span><span class="pun">(</span></li><li class="L9"><span class="pln">      </span><span class="str">'company'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $entity</span><span class="pun">-&gt;</span><span class="pln">getCompanySlug</span><span class="pun">(),</span></li><li class="L0"><span class="pln">      </span><span class="str">'location'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $entity</span><span class="pun">-&gt;</span><span class="pln">getLocationSlug</span><span class="pun">(),</span></li><li class="L1"><span class="pln">      </span><span class="str">'token'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $entity</span><span class="pun">-&gt;</span><span class="pln">getToken</span><span class="pun">(),</span></li><li class="L2"><span class="pln">      </span><span class="str">'position'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> $entity</span><span class="pun">-&gt;</span><span class="pln">getPositionSlug</span><span class="pun">()</span></li><li class="L3"><span class="pln">    </span><span class="pun">)));</span></li><li class="L4"><span class="pln">  </span><span class="pun">}</span></li><li class="L5"><span class="pln"> </span></li><li class="L6"><span class="pln">  </span><span class="com">// ...</span></li><li class="L7"><span class="pun">}</span></li></ol></pre>
+<pre class="prettyprint linenums">
+// src/Ens/JobeetBundle/Controller/JobController.php
+// ...
+ 
+public function createAction(Request $request)
+{
+  // ...
+ 
+  if ($form->isValid()) {
+    // ...
+ 
+    return $this->redirect($this->generateUrl('ens_job_preview', array(
+      'company' => $entity->getCompanySlug(),
+      'location' => $entity->getLocationSlug(),
+      'token' => $entity->getToken(),
+      'position' => $entity->getPositionSlug()
+    )));
+  }
+ 
+  // ...
+}
+ 
+public function updateAction(Request $request,$token)
+{
+  // ...
+ 
+  if ($editForm->isValid()) {
+    // ...
+ 
+    return $this->redirect($this->generateUrl('ens_job_preview', array(
+      'company' => $entity->getCompanySlug(),
+      'location' => $entity->getLocationSlug(),
+      'token' => $entity->getToken(),
+      'position' => $entity->getPositionSlug()
+    )));
+  }
+ 
+  // ...
+}
+</pre>
 <br>
 <h2>Activation et publication des offres</h2>
 <p>Dans la section précédente, il y a un lien pour publier l'offre. Le lien doit être modifié pour pointer vers une nouvelle action <strong>publish</strong>. Pour cela, nous allons créer une nouvelle route:</p>
@@ -343,11 +380,9 @@ public function previewAction($token)
   ));
 }
  
-public function publishAction($token)
+public function publishAction(Request $request,$token)
 {
   $form = $this->createPublishForm($token);
-  $request = $this->getRequest();
- 
   $form->bindRequest($request);
  
   if ($form->isValid()) {
