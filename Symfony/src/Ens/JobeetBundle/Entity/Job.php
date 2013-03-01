@@ -95,7 +95,7 @@ class Job
      */
     private $category;
     
-    public $file;
+    private $file;
 
 
     /**
@@ -622,5 +622,22 @@ class Job
         }
         $this->expires_at = new \DateTime(date('Y-m-d H:i:s', time() + 86400 * 30));
         return true;
+    }
+    
+    public function setFile($file)
+    {
+        $this->file = $file;
+    
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Ens\JobeetBundle\Entity\Category 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }
