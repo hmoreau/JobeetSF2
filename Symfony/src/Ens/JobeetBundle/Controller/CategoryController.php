@@ -24,19 +24,23 @@ class CategoryController extends Controller
         
         $activeJobsPaginator = $em->getRepository('EnsJobeetBundle:Job')->getActiveJobs($category->getId(), $jobs_per_page, ($page - 1) * $jobs_per_page);
         $total_jobs = $activeJobsPaginator->count();
+       // var_dump($activeJobsPaginator);
         $last_page = ceil($total_jobs / $jobs_per_page);
         $previous_page = $page > 1 ? $page - 1 : 1;
         $next_page = $page < $last_page ? $page + 1 : $last_page;
         
         $category->setActiveJobs($activeJobsPaginator);
 
-        return $this->render('EnsJobeetBundle:Category:show.html.twig', array(
+        $format = $this->getRequest()->getRequestFormat();
+        
+       return $this->render('EnsJobeetBundle:Category:show.'.$format.'.twig', array(
             'category' => $category,
             'last_page' => $last_page,
             'previous_page' => $previous_page,
             'current_page' => $page,
             'next_page' => $next_page,
-            'total_jobs' => $total_jobs
+            'total_jobs' => $total_jobs,
+            'feedId' => sha1($this->get('router')->generate('EnsJobeetBundle_category', array('slug' =>  $category->getSlug(), '_format' => 'atom'), true)),
         ));
     }
 }

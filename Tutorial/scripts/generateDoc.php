@@ -16,11 +16,11 @@ $pages = array(
     "le-paquet-admin"=>"Le paquet Admin",
     "securite"=>"Sécurité",
     "flux-de-donnees"=>"Flux de données",
-    "services-web"=>"Services Web",
+   /* "services-web"=>"Services Web",
     "l-envoi-d-email"=>"L'envoi d'email",
     "la-recherche"=>"La recherche",
     "ajax"=>"AJAX",
-    "internationalisation-et-regionalisation"=>"Internationalisation et régionalisation"
+    "internationalisation-et-regionalisation"=>"Internationalisation et régionalisation"*/
 );
 $menu = "";
 $i = 0;
